@@ -26,4 +26,56 @@ Não é novidade do java8, mas sao classes instanciadas diretamente no momento d
 
 
 ## Interfaces Funcionais
-- interfaces que tem apenas um método
+- interface que possui apenas um método abstrato;
+- além desse método ela pode ter outros métodos, contanto que sejam default ou 'static';
+- apenas interfaces funcionais podem receber lambdas;
+- é preciso que o lambda seja compativel com a interface funcional, ou seja, recebe e retorna atributos compativeis;
+
+## Lambda
+- funciona para qualquer interface que tenha apenas um método abstrato;
+
+Ex.:
+>
+public class LambdaEx2 {
+	public static void main(String[] args) {
+		// execucao normal
+		new Thread(new Runnable() {
+		    @Override
+		    public void run() {
+		        System.out.println("Executando um Runnable");
+		    }
+		}).start();
+		// execucao lambda
+		new Thread(() -> System.out.println("Executando um Runnable com lambda")).start();
+	}
+}
+
+## Method referance
+
+Dizemos que Comparator.comparing recebe um lambda
+Na verdade, ela recebe uma instância de uma interface funcional. No caso é a interface Function que tem apenas um método, o apply.
+>
+metodo default em Comparator
+palavras.sort(Comparator.comparing(s -> s.length()));
+
+- Com method referece temos uma forma ainda mais sucinta de escrever
+
+> palavras.sort(Comparator.comparing(String::length));
+
+Ainda mais curta usando import statico
+> import static java.util.Comparator.*;
+palavras.sort(comparing(String::length));
+
+Outros exemplos
+> palavras.forEach(s -> System.out.println(s));
+palavras.forEach(System.out::println);
+
+> Function<Usuario, String> funcao = u -> u.getNome();
+Function<Usuario, String> funcao = Usuario::getNome;
+
+obs.: Nem sempre é possivel usar method reference
+
+ex:
+> s -> s.substring(0, 5)
+
+
