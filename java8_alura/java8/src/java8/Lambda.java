@@ -9,9 +9,6 @@ public class Lambda {
 	public static void main(String[] args) {
 		List<String> palavras = Arrays.asList("Alura online", "editora casa do codigo", "caelum");
 		
-		
-		
-		
 		// funcao anonima. Implemento a interface direto
 		Consumer<String> consumidor = new Consumer<String>() {
 			@Override
@@ -30,7 +27,7 @@ public class Lambda {
 		});
 		
 		// LAMBDA -> Como forEach espera por um consumer e a interface consumer
-		// exige a implementacao de apenas um método, o mesmo pode ser chamado direto
+		// exige a implementacao de apenas um mï¿½todo, o mesmo pode ser chamado direto
 		// sem precisar dar um new nele usando lambdas	
 		palavras.forEach((String s) -> {
 			System.out.println(s);
