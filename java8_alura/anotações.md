@@ -79,3 +79,34 @@ ex:
 > s -> s.substring(0, 5)
 
 
+# Strean
+Streams sao fluxos de dados. Streams foram criadas para separar o tratamendo de dados, como listas. No lugar de aplicar metodos diretamente nas lsitas, vc é obrigado
+a coloca-lá em uma strem, trabalhar os dados e depois retorna-lá para lista novamente.
+
+- Stream são usadas principalmente para trabalhar com coleções
+
+ex.: 
+> cursos.stream()
+	.filter(c -> c.getAlunos() >= 100)
+	.map(Curso::getAlunos)
+	.forEach(System.out::println);
+
+- Na stream os metodos sao empilhados, onde o seguinte recebe o resultado do anterior.
+
+ex.:
+> int sum = cursos.stream()
+	.filter(c -> c.getAlunos() >= 100)
+	.mapToInt(Curso::getAlunos)
+	.sum();
+
+Obs.: repare que apos usar o mapToInt retorna um inteiro e logo abaixo já posso usar um sum() direto. Ou seja meu objeto foi transformado em um inteiro no meio do processo.
+
+
+# Optional
+- usado para trabalhar melhor com nulls
+
+ex.: 
+> Optional<Curso> curso = cursos.stream()
+			.filter(c -> c.getAlunos() >= 100)
+			.findAny();
+REFAZER O video 5
