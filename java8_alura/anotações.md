@@ -101,6 +101,23 @@ ex.:
 
 Obs.: repare que apos usar o mapToInt retorna um inteiro e logo abaixo já posso usar um sum() direto. Ou seja meu objeto foi transformado em um inteiro no meio do processo.
 
+### Mais novidades
+- Lista imutável
+> Collections.unmodifiableList(Arrays.asList("joao", "fernanda"));
+
+- of -> transforma objetos em um array e ja deixa a lista imutável; Pode ser chamado de List, Set e Map
+> return List.of(joao, fernanda);
+
+- flatMap -> o map retornaria um array, criando um array de array. Já o flatMap retorna o próprio objeto modificado.
+> public static List<String> transformaEmListaDeNomes(List<Aluno> lista) {
+	return lista
+			.stream()
+			.flatMap(a -> Stream.ofNullable(a.getNome()))
+			.map(s -> s.toUpperCase())
+			.collect(Collectors.toList());
+	}
+
+
 
 ## Optional
 - usado para trabalhar melhor com nulls
@@ -137,6 +154,10 @@ Trabalhando com horas
   LocalTime hora = LocalTime.of(15, 30, minute)
   
 	
+## Jshell
+Permite executar comando a partir do console. Semelahnto ao JS no navegador
+
+> jshell
 
 
 
