@@ -1,23 +1,27 @@
 package java8;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Principal {
 
 	public static void main(String[] args) {
-		// AlunoServico alunoServico = new AlunoServico();
-		var alunoServico = new AlunoServico();
+		AlunoServico alunoServico = new AlunoServico();
+		TurmaServico turmaServico = new TurmaServico();
 		
-		alunoServico.listar()
+		/* alunoServico.listar()
 			.stream()
-			.forEach(System.out::println);
+			.forEach(System.out::println); */
 		
 		// List<String> nomes = transformaEmListaDeNomes(alunoServico.listar());
 		var nomes = transformaEmListaDeNomes(alunoServico.listar());
 		System.out.println(nomes);
+		
+		agrupaPorCurso(turmaServico.listar());
+		agrupaPorCursoUsandoFiltering(turmaServico.listar());
 		
 		
 		// Optional<Aluno> aluno = alunoServico.listarPorCpf(1L);
@@ -54,4 +58,24 @@ public class Principal {
 			.collect(Collectors.toList());
 	}
 
+	public static void agrupaPorCurso(List<Turma> turmas) {
+		// agrupar por curso
+		Map<Curso, List<Turma>> turmasPorCurso = turmas.stream()
+				.filter(a -> LocalDate.of(2019, 06, 10).equals(a.getInicio()))
+				// grouping by retorna uma map
+				.collect(Collectors.groupingBy(Turma::getCurso));
+		
+		System.out.println("Relação de turmas por curso" + turmasPorCurso);
+	}
+	
+	public static void agrupaPorCursoUsandoFiltering(List<Turma> turmas) {
+		// agrupar por curso
+		Map<Curso, List<Turma>> turmasPorCurso = turmas.stream()
+				.collect(Collectors.groupingBy(Turma::getCurso,
+						// com filtering eu consigo filtrar direto dentro da lista, com isso trago os cursos, mas nao trago os alunos
+						Collectors.filtering(a -> a.getInicio().equals(LocalDate.of(2019, 06, 04)),
+								Collectors.toList())));
+		
+		System.out.println("Relação de turmas por curso" + turmasPorCurso);
+	}
 }
