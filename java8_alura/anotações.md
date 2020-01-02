@@ -126,6 +126,12 @@ metodos:
 - get -> retorna o elemento, se o mesmo nao existir retorna exception
 - optionalCurso.orElse(null); -> pega se existir e indica oq passar caso nao exista;
 - optionalCurso.ifPresent(c -> System.out.println(c.getNome())); -> executa uma funcao caso exista o atributo
+- optionalCurso.ifPresentOrElse(System.out::println,
+				() -> System.out.println("não encontrado!"));
+- or -> permite executar uma funcao caso o retorno seja null
+> Optional<Aluno> alunoRecuperado = alunoServico.listarPorCpf(0L)
+				.or(() -> alunoServico.listarPorCpf(11111L))
+				.or(() -> alunoServico.listarPorCpf(1L));
 
 ex.: 
 > Optional<Curso> curso = cursos.stream()
@@ -159,5 +165,12 @@ Permite executar comando a partir do console. Semelahnto ao JS no navegador
 
 > jshell
 
+## Var
+Permite criar uma variável sem definir o tipo
+EX.:
 
+> Optional<Aluno> aluno = alunoServico.listarPorCpf(1L);
+
+> // java sabe que o retnor será uma lista de alunos
+> var aluno = alunoServico.listarPorCpf(1L);
 
