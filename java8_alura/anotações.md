@@ -174,3 +174,22 @@ EX.:
 > // java sabe que o retnor será uma lista de alunos
 > var aluno = alunoServico.listarPorCpf(1L);
 
+
+## Http2Client
+
+Exemplo:
+
+> public HttpResponse<String> criarRequisicao() throws IOException, InterruptedException, URISyntaxException {
+		// obriagatório informar os redirects
+		HttpClient client = HttpClient.newBuilder()
+				.followRedirects(HttpClient.Redirect.ALWAYS)
+				.build();
+
+		HttpRequest req = HttpRequest.newBuilder(new URI("https://turini.github.io/livro-java-9/books.csv"))
+				.GET()
+				.build();
+		
+		return client.send(req, HttpResponse.BodyHandlers.ofString());
+	}
+
+
