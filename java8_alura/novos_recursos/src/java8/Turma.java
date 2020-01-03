@@ -53,7 +53,11 @@ public class Turma {
 
 	@Override
 	public String toString() {
-		return "Turma [inicio=" + inicio + ", fim=" + fim + ", curso=" + curso + ", alunos=" + alunos + "]";
+		return "Turma inicio=" + inicio + ""
+				+ "\n fim=" + fim + ""
+				+ "\ncurso=" + curso.nome
+				+ "\nLivro= " + curso.livro.getNome()
+				+ "\nalunos=" + alunos;
 	}
 
 }

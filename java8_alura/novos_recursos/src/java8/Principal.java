@@ -1,5 +1,7 @@
 package java8;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +10,14 @@ import java.util.stream.Stream;
 
 public class Principal {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException {
 		AlunoServico alunoServico = new AlunoServico();
 		TurmaServico turmaServico = new TurmaServico();
+		// TesteHttpDAO dao = new TesteHttpDAO();
+		LivroServico livroServico = new LivroServico();
+		
+		// chamada assincrona que será retornada por ultimo
+		livroServico.listar();
 		
 		/* alunoServico.listar()
 			.stream()
@@ -46,7 +53,12 @@ public class Principal {
 		
 		System.out.println("Aluno recuperado " + alunoRecuperado.get());
 		
-		
+		/*
+		try {
+			dao.testarConexaoHttp();
+		} catch (IOException | InterruptedException | URISyntaxException e) {
+			e.printStackTrace();
+		}*/
 	}
 	
 	public static List<String> transformaEmListaDeNomes(List<Aluno> lista) {
